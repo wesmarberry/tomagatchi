@@ -3,12 +3,13 @@
 class Tamagatchi {
 	constructor(){
 		this.age = 0
+		this.ageInterval = 120 //seconds until tamagatchi ages up
 		this.hunger = 5
 		this.sleepiness = 5
 		this.boredom = 5
-		this.maxAttr = 10
-		this.interval = 60
-		this.rate = 2
+		this.maxAttr = 10 // maximum tamagatchi's attributes can go before it dies
+		this.interval = 60 // seconds until tamagatchi's attributes increase
+		this.rate = 2 // rate at which tamagatchi's attributes increase
 		this.display = 'https://vignette.wikia.nocookie.net/tamagotchi/images/5/52/Acchitchi_fired_up.png/revision/latest?cb=20150412182449'
 		this.name = ''
 	}
@@ -21,6 +22,31 @@ class Tamagatchi {
 		$('#hunger').text(this.hunger)
 	}
 	sleep(){
+		console.log('Tamagatchi is sleeping');
+		clearInterval(game.awakeTimer)
+		let sleepingTime = 0
+		game.sleepTimer = setInterval(() => {
+			sleepingTime++
+			console.log(sleepingTime);
+			if (sleepingTime % 20 === 0) {
+				this.sleepiness--
+			}
+			$('#sleepiness').text(this.sleepiness)
+		}, 100)
+		
+	}
+	wakeUp(){
+		console.log('Tamagatchi is awake');
+		clearInterval(game.sleepTimer)
+		let awakeTime = 0
+		game.awakeTimer = setInterval(() => {
+			awakeTime++
+			console.log(awakeTime);
+			if (awakeTime % 20 === 0) {
+				this.sleepiness++
+			}
+			$('#sleepiness').text(this.sleepiness)
+		}, 100)
 
 	}
 	ageUp(){
@@ -52,6 +78,8 @@ $('form').on('submit', (e) => {
 const game = {
 	time: 0,
 	lightsOn: true,
+	sleepTimer: '',
+	awakeTimer: '',
 	createTamagatchi(){
 		myTamagatchi = new Tamagatchi() //instantiates tamagatchi
 		console.log(myTamagatchi);
@@ -61,36 +89,50 @@ const game = {
 		$('#sleepiness').text(myTamagatchi.sleepiness)
 		$('#hunger').text(myTamagatchi.hunger)
 		this.startTimer()
+		myTamagatchi.wakeUp()
 	},
 	startTimer(){
 		setInterval(() => {
 			this.time++
 			$('#timer').text(this.time)
 			if (this.time % myTamagatchi.interval === 0) {
-				this.increaseAtt()
+				this.increaseHunger()
 			}
+
 		}, 100)
 	},
 	printClock(){
 
 	},
-	increaseAtt(){
+	increaseHunger(){
+		//hunger increases at the rate defined in the myTamagatchi class
 		if (myTamagatchi.hunger < (myTamagatchi.maxAttr - myTamagatchi.rate)) {
 			myTamagatchi.hunger += myTamagatchi.rate
 			$('#hunger').text(myTamagatchi.hunger)
 		} 
-		if (myTamagatchi.boredom < (myTamagatchi.maxAttr - myTamagatchi.rate)) {
-			myTamagatchi.boredom += myTamagatchi.rate
-			$('#boredom').text(myTamagatchi.boredom)
-		}
-		if (myTamagatchi.sleepiness < (myTamagatchi.maxAttr - myTamagatchi.rate)) {
-			myTamagatchi.sleepiness += myTamagatchi.rate
-			$('#sleepiness').text(myTamagatchi.sleepiness)
-		}
+		// if (myTamagatchi.boredom < (myTamagatchi.maxAttr - myTamagatchi.rate)) {
+		// 	myTamagatchi.boredom += myTamagatchi.rate
+		// 	$('#boredom').text(myTamagatchi.boredom)
+		// }
+		// if (myTamagatchi.sleepiness < (myTamagatchi.maxAttr - myTamagatchi.rate) && lightsOn === true) {
+		// 	myTamagatchi.sleepiness += 1
+		// 	$('#sleepiness').text(myTamagatchi.sleepiness)
+		// } else if ()
 
 	},
 	feed(){
 		myTamagatchi.eat()
+	},
+	lightSwitch(){
+		if (this.lightsOn === true) {
+			this.lightsOn = false
+			$('body').css('background-color', 'grey')
+			myTamagatchi.sleep()
+		} else {
+			this.lightsOn = true
+			$('body').css('background-color', 'white')
+			myTamagatchi.wakeUp()
+		}
 	}
 
 }
@@ -107,10 +149,14 @@ $('#action-buttons').on('click', (e) => {
 		game.createTamagatchi()
 
 	}
-	if (buttonClicked === 'Feed') {
+	if (buttonClicked === 'Feed' && game.lightsOn === true) {
 		game.feed()
+	} else {
+		console.log('Cannot feed Tamagatchi');
 	}
-
+	if (buttonClicked === 'Lightswitch') {
+		game.lightSwitch()
+	}
 })
 
 
