@@ -10,10 +10,9 @@ class Tamagatchi {
 		this.interval = 60
 		this.rate = 2
 		this.display = 'https://vignette.wikia.nocookie.net/tamagotchi/images/5/52/Acchitchi_fired_up.png/revision/latest?cb=20150412182449'
-		this.name = 'Wes'
+		this.name = ''
 	}
 	eat(){
-		
 		this.hunger -= 3
 		console.log(this.hunger + ' is the tamagatchis hunger level');
 		if (this.hunger <= 0) {
@@ -37,6 +36,18 @@ class Tamagatchi {
 
 	}
 }
+
+
+//when form is submitted stores name in myTamagatchi and displays user input of tamagatchi name
+$('form').on('submit', (e) => {
+	e.preventDefault()
+	const inputValue = $('#tamagatchi-name').val()
+	myTamagatchi.name = inputValue
+	$('#name').text(inputValue)
+	$('#tamagatchi-name').val('')
+
+})
+
 
 const game = {
 	time: 0,
