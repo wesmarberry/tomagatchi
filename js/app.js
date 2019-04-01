@@ -8,4 +8,8 @@ class Tamagatchi {
 		this.boredom = 5
 		this.name = prompt("What is your Tamagatchi's name?")
 	}
+	eat(){
+		this.hunger += 3
+		console.log(this.hunger + ' is the tamagatchis hunger level');
+	}
 }
