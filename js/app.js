@@ -12,4 +12,21 @@ class Tamagatchi {
 		this.hunger += 3
 		console.log(this.hunger + ' is the tamagatchis hunger level');
 	}
+	sleep(){
+
+	}
+	ageUp(){
+
+	}
+	morph(){
+
+	}
+	die(){
+
+	}
+	play(){
+		
+	}
 }
+
+
