@@ -38,7 +38,40 @@ const game = {
 		console.log(myTamagatchi);
 		const $disp = $('<img/>').attr('src', myTamagatchi.display)
 		$('#playground').append($disp)
+	},
+	startTimer(){
+
 	}
 }
+
+$('#action-buttons').on('click', (e) => {
+	const $buttonClicked = $(e.target).text()
+	console.log($buttonClicked);
+	if ($buttonClicked === 'Create Tamagatchi') {
+		game.createTamagatchi()
+	}
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
