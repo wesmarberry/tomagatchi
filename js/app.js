@@ -8,8 +8,10 @@ class Tamagatchi {
 		this.sleepiness = 5
 		this.boredom = 5
 		this.maxAttr = 10 // maximum tamagatchi's attributes can go before it dies
-		this.interval = 60 // seconds until tamagatchi's attributes increase
-		this.rate = 2 // rate at which tamagatchi's attributes increase
+		this.hungerInterval = 60 // seconds until tamagatchi's hunger increases
+		this.hungerRate = 2 // rate at which tamagatchi's hunger increases
+		this.boredomRate = 100 // seconds until tamagatchis boredom increases
+		this.boredomRate = 4 // rate at which tamagatchi's boredom increases
 		this.display = 'https://vignette.wikia.nocookie.net/tamagotchi/images/5/52/Acchitchi_fired_up.png/revision/latest?cb=20150412182449'
 		this.name = ''
 	}
@@ -59,7 +61,11 @@ class Tamagatchi {
 
 	}
 	play(){
-
+		this.boredom -= 4
+		if (this.boredom <= 0) {
+			this.boredom = 0
+		}
+		$('#boredom').text(this.boredom)
 	}
 }
 
@@ -120,6 +126,9 @@ const game = {
 		// } else if ()
 
 	},
+	increaseBoredom(){
+		if ()
+	},
 	feed(){
 		myTamagatchi.eat()
 	},
@@ -132,6 +141,13 @@ const game = {
 			this.lightsOn = true
 			$('body').css('background-color', 'white')
 			myTamagatchi.wakeUp()
+		}
+	},
+	play(){
+		if (this.lightsOn === true) {
+			myTamagatchi.play()
+		} else {
+			console.log("Tamagatchi can't play it's sleeping");
 		}
 	}
 
@@ -156,6 +172,9 @@ $('#action-buttons').on('click', (e) => {
 	}
 	if (buttonClicked === 'Lightswitch') {
 		game.lightSwitch()
+	}
+	if (buttonClicked === 'Play!') {
+		game.play()
 	}
 })
 
