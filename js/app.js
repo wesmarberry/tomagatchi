@@ -39,6 +39,9 @@ class Tamagatchi {
 			if (sleepingTime % 20 === 0) {
 				this.sleepiness--
 			}
+			if (this.sleepiness <= 0) {
+				this.sleepiness = 0
+			}
 			$('#sleepiness').text(this.sleepiness) //displays sleepiness
 		}, 100)
 		
@@ -58,18 +61,27 @@ class Tamagatchi {
 			if (awakeTime % 20 === 0) {
 				this.sleepiness++
 			}
+			if (this.sleepiness === this.maxAttr) {
+				console.log('sleepiness killing him');
+				game.causeOfDeath = 'Sleepiness'
+				clearInterval(game.awakeTimer)
+				this.die()
+			} 
 			$('#sleepiness').text(this.sleepiness)
 		}, 100)
 
 	}
 	ageUp(){
-
+		this.age++
 	}
 	morph(){
 
 	}
 	die(){
-
+		clearInterval(game.gameTimer)
+		clearInterval(game.sleepTimer)
+		clearInterval(game.awakeTimer)
+		$('#playground').prepend($('<h1/>').text('Your Tamagatchi Died of ' + game.causeOfDeath + '. Game Over').css('color', 'red'))
 	}
 	play(){
 
@@ -97,8 +109,10 @@ $('form').on('submit', (e) => {
 const game = {
 	time: 0,
 	lightsOn: true,
+	gameTimer: '',
 	sleepTimer: '',
 	awakeTimer: '',
+	causeOfDeath: '',
 	createTamagatchi(){
 		myTamagatchi = new Tamagatchi() //instantiates tamagatchi
 		console.log(myTamagatchi);
@@ -120,7 +134,7 @@ const game = {
 	},
 	startTimer(){
 		//starts the timer
-		setInterval(() => {
+		this.gameTimer = setInterval(() => {
 			this.time++
 			//displays the time on the DOM
 			$('#timer').text(this.time)
@@ -135,6 +149,10 @@ const game = {
 				console.log("boredom interval reached");
 				this.increaseBoredom()
 			}
+			//if the current time reaches 2 min then tamagatchi ages up
+			if (this.time % myTamagatchi.ageInterval == 0) {
+				myTamagatchi.ageUp()
+			}
 		}, 100)
 	},
 	printClock(){
@@ -142,10 +160,15 @@ const game = {
 	},
 	increaseHunger(){
 		//hunger increases at the rate defined in the myTamagatchi class
-		if (myTamagatchi.hunger < (myTamagatchi.maxAttr - myTamagatchi.hungerRate)) {
+		if (myTamagatchi.hunger < myTamagatchi.maxAttr) {
 			myTamagatchi.hunger += myTamagatchi.hungerRate
 			$('#hunger').text(myTamagatchi.hunger)
-		} 
+		}
+		if (myTamagatchi.hunger >= myTamagatchi.maxAttr) {
+			console.log('Died in ingrease hunger');
+			this.causeOfDeath = 'Hunger'
+			myTamagatchi.die()
+		}
 		// if (myTamagatchi.boredom < (myTamagatchi.maxAttr - myTamagatchi.rate)) {
 		// 	myTamagatchi.boredom += myTamagatchi.rate
 		// 	$('#boredom').text(myTamagatchi.boredom)
@@ -158,10 +181,15 @@ const game = {
 	},
 	increaseBoredom(){
 		//boredom is increased at the rate defined in the tamagatchi class
-		if (myTamagatchi.boredom < (myTamagatchi.maxAttr - myTamagatchi.boredomRate)) {
+		if (myTamagatchi.boredom < myTamagatchi.maxAttr) {
 			console.log('boredom increased');
 			myTamagatchi.boredom += myTamagatchi.boredomRate
 			$('#boredom').text(myTamagatchi.boredom)
+		} 
+		if (myTamagatchi.boredom >= myTamagatchi.maxAttr) {
+
+			this.causeOfDeath = 'Boredom'
+			myTamagatchi.die()
 		}
 	},
 	feed(){
