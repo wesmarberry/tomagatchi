@@ -73,6 +73,7 @@ class Tamagatchi {
 	}
 	ageUp(){
 		this.age++
+		$('#age').text(this.age)
 	}
 	morph(){
 
