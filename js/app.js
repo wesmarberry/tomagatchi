@@ -18,8 +18,13 @@ class Tamagatchi {
 		this.boredomRate = 4 // rate at which tamagatchi's boredom increases
 		this.sleepRate = 4 // number of seconds until tamagatchi's sleep either increases or decreases
 		this.dead = false
-		this.display = 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png'
-		this.phases = ['https://assets.pokemon.com/assets/cms2/img/pokedex/full/008.png', 'https://cdn.bulbagarden.net/upload/thumb/0/02/Blasty.png/230px-Blasty.png']
+		this.phases = [
+			['https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/008.png', 'https://cdn.bulbagarden.net/upload/thumb/0/02/Blasty.png/230px-Blasty.png'],
+			['https://vignette.wikia.nocookie.net/pokemon-revolution/images/4/41/004Charmander_OS_anime_2.png/revision/latest?cb=20150625082016', 'https://pre00.deviantart.net/fe39/th/pre/i/2016/365/e/8/charmeleon_by_natsuakai-d5lq58r.png', 'https://static.pokemonpets.com/images/monsters-images-300-300/6-Charizard.png'],
+			['https://static.pokemonpets.com/images/monsters-images-300-300/1-Bulbasaur.png', 'https://cdn.bulbagarden.net/upload/thumb/7/73/002Ivysaur.png/250px-002Ivysaur.png', 'https://cdn.bulbagarden.net/upload/thumb/a/ae/003Venusaur.png/1200px-003Venusaur.png']
+			]
+		this.rand = Math.floor(Math.random() * 3)
+		this.display = this.phases[this.rand][0]
 		this.name = '' // to be set with a form submission
 	}
 	eat(){
@@ -44,6 +49,7 @@ class Tamagatchi {
 			if (game.awakeTime % this.sleepRate === 0 && game.awakeTime !== 0) {
 				this.sleepiness++
 			}
+			// if sleepiness gets to the max attribute limit tamagatchi dies
 			if (this.sleepiness === this.maxAttr) {
 				game.causeOfDeath = 'Sleepiness'
 				this.die()
@@ -52,28 +58,31 @@ class Tamagatchi {
 	}
 	ageUp(){
 		this.age++
+		// displays that the tamagatchi got older in the message board
 		$('#message-ul').prepend($('<li/>').text(myTamagatchi.name + ' got older!'))
+		// updates age on message board
 		$('#age').text(this.age)
+		// morphs the tamagatchi based on age
 		if (this.age === this.morphAge1) {
 			this.morph1()
 		} else if (this.age === this.morphAge2) {
 			this.morph2()
-		} else if (this.age === 10) {
+		} else if (this.age === 10) { // if the age get to 10 tamagatchi dies of natural causes and player wins
 			game.causeOfDeath = 'Natural Causes'
 			this.die()
 		}
 	}
 	morph1(){
-		this.maxAttr = 15
-		this.hungerInterval = 6
+		this.maxAttr = 15 // new max attribute
+		this.hungerInterval = 6 
 		this.hungerRate = 2 // rate at which tamagatchi's hunger increases
 		this.hungerDown = 4
 		this.boredomInterval = 12// seconds until tamagatchis boredom increases
 		this.boredomDown = 3
 		this.boredomRate = 5 // rate at which tamagatchi's boredom increases
 		this.sleepRate = 2
-		this.display = this.phases[0]
-		// $('#playground img').attr('src', this.display)
+		this.display = this.phases[this.rand][1]
+		// loop for animation when tamagatchi evolves
 		for (let i = 0; i < 50; i++) {
 
 		$("#playground img")
@@ -96,9 +105,9 @@ class Tamagatchi {
 		this.boredomDown = 4
 		this.boredomRate = 6 // rate at which tamagatchi's boredom increases
 		this.sleepRate = 2
-		this.display = this.phases[1]
+		this.display = this.phases[this.rand][2]
 		for (let i = 0; i < 50; i++) {
-		$("#playground img")
+			$("#playground img")
 	        .fadeOut(1, () => {
 	            $("#playground img").attr('src', this.display);
 	        })
