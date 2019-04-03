@@ -74,8 +74,7 @@ class Tamagatchi {
 		this.boredomRate = 5 // rate at which tamagatchi's boredom increases
 		this.sleepRate = 2
 		this.display = this.phases[0]
-		$('#playground img').remove()
-		$('#playground').append($('<img/>').attr('src', this.display))
+		$('#playground img').attr('src', this.display)
 		$('#message-ul').prepend($('<li/>').text(myTamagatchi.name + ' evolved!'))
 		$('#death').text(this.maxAttr)
 	}
@@ -150,6 +149,7 @@ const game = {
 	lightsOn: true,
 	gameTimer: '',
 	sleepingTime: 0,
+	boredomTime: 0,
 	awakeTime: 0,
 	causeOfDeath: '',
 	bounceSpeed: 3000,
@@ -193,7 +193,7 @@ const game = {
 			}
 			//if the current time is divisible by the boredom interval then it increases the boredom by the boredom rate
 			//tamagatchi cannot get more bored while alseep so this only runs when the lights are on
-			if (this.time % myTamagatchi.boredomInterval === 0 && this.lightsOn === true) {
+			if (this.boredomTime % myTamagatchi.boredomInterval === 0 && this.boredomTime !== 0) {
 				this.increaseBoredom()
 			}
 			//if the current time reaches 2 min then tamagatchi ages up
@@ -204,6 +204,7 @@ const game = {
 				myTamagatchi.wakeUp()
 				this.sleepingTime = 0
 				this.awakeTime++
+				this.boredomTime++
 			} else if (this.lightsOn === false) {
 				myTamagatchi.sleep()
 				this.awakeTime = 0
