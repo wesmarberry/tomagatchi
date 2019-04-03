@@ -175,7 +175,7 @@ const game = {
 
 		//creates image of the tamagatchi
 		const $disp = $('<img/>').attr('src', myTamagatchi.display)
-		$disp.css({'left': '200px'})
+		$disp.css({'left': '0px'})
 		//puts tamagatchi display on the DOM
 		$('#playground').append($disp)
 		// this.bounce($disp)
@@ -342,6 +342,10 @@ $('#action-buttons').on('click', (e) => {
 	} else if (buttonClicked === 'Play!') {
 		game.play()
 	} 
+})
+
+$('#new-game').on('click', () => {
+	window.location.reload()
 })
 
 

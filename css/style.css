@@ -12,6 +12,7 @@ body {
 h1 {
 	margin-left: 10px;
 	font-family: 'Rakkas', cursive;
+	margin-bottom: 5px;
 }
 
 #attribute-board {
@@ -26,7 +27,7 @@ h1 {
 }
 
 #playground {
-	margin-top: 25px;
+	margin-top: 20px;
 	vertical-align: bottom;
 }
 
@@ -63,7 +64,7 @@ h1 {
 }
 
 button {
-	font-family: 'Rakkas', cursive;
+  font-family: 'Rakkas', cursive;
   display: inline-block;
   padding: 10px;
   font-size: 18px;
@@ -86,6 +87,7 @@ button {
 	box-shadow: -7px 7px black;
 	border-radius: 5px;
 	margin-left: 10px;
+	margin-top: 0px;
 	overflow: hidden;
 }
 
@@ -136,5 +138,9 @@ li {
 	font-family: 'Rakkas', cursive;
 }
 
-
+#new-game {
+	margin-top: 10px;
+	margin-left: 10px;
+	padding: 5px;
+}
 
