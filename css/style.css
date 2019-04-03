@@ -1,0 +1,140 @@
+img {
+	position: relative;
+}
+
+body {
+	background: url(https://backgroundcheckall.com/wp-content/uploads/2018/10/pokemon-anime-background-2.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin: 0 0 0 0;
+}
+
+h1 {
+	margin-left: 10px;
+	font-family: 'Rakkas', cursive;
+}
+
+#attribute-board {
+	background-color: #093145;
+	width: 200px;
+	color: #62bdeb;
+	padding: 2px 0px 5px 10px;
+	border-radius: 10px;
+	box-shadow: -7px 7px black;
+	margin-top: 5px;
+	margin-right: 5px;
+}
+
+#playground {
+	margin-top: 25px;
+	vertical-align: bottom;
+}
+
+.time {
+	background-color: #093145;
+	border-radius: 10px;
+	box-shadow: -7px 7px black;
+	color: #dcf0fa;
+	width: 270px;
+	height: 20px;
+	padding: 5px 5px 5px 10px;
+}
+
+#attribute-board span {
+	color: #dcf0fa;
+	padding-left: 10px;
+}
+
+.container1 {
+	display: flex;
+	justify-content: space-between;
+}
+
+#playground {
+	width: 100%;
+	height: 250px;
+	display: flex;
+	justify-content: center;
+}
+
+#playground img {
+	height: 200px;
+	bottom: 0;
+}
+
+button {
+	font-family: 'Rakkas', cursive;
+  display: inline-block;
+  padding: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #dcf0fa;
+  background-color: #093145;
+  border: none;
+  border-radius: 5px;
+
+}
+
+.message-board {
+	height: 200px;
+	width: 300px;
+	color: #dcf0fa;
+	background-color: #093145;
+	box-shadow: -7px 7px black;
+	border-radius: 5px;
+	margin-left: 10px;
+	overflow: hidden;
+}
+
+button:hover {
+      background-color: navy;
+    }
+
+button:active {
+  background-color: black;
+  box-shadow: 0 5px #666;
+  transform: translatex(2px) translatey(3px);
+}
+
+#action-buttons {
+	display: flex;
+	justify-content: space-around;
+	margin: 8px 8px 8px 8px;
+}
+
+input {
+	height: 35px;
+	font-size: 18px;
+	border-radius: 5px;
+	width: 300px;
+}
+
+.overlay-div {
+	height: 100%;
+	width: 100%;
+	margin: 0 0 0 0;
+}
+
+#message-header {
+	text-decoration: underline;
+	color: #62bdeb;
+	text-align: center;
+}
+
+ul {
+	list-style-type: none;
+}
+
+h3 {
+	font-family: 'Rakkas', cursive;
+}
+
+li {
+	font-family: 'Rakkas', cursive;
+}
+
+
+

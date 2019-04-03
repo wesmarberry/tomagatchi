@@ -4,34 +4,51 @@
 	<title>Tamagatchi App</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+	<link href="https://fonts.googleapis.com/css?family=Rakkas" rel="stylesheet">
 </head>
 <body>
-	
-	<h1>Tomagatchi!</h1>
+	<div class='overlay-div'>
+		<div class="container1">
+			<div class="container2">
+				<h1>Tomagatchi!</h1>
+				<div class='message-board'>
+					<h3 id='message-header'>Message Board</h3>
+					<ul id="message-ul">
+						<li>Feed your tamagatchi to keep it alive</li>
+						<li>Play with your tamagatchi to keep it entertained</li>
+						<li>Turn out the lights to make your tamagatchi sleep</li>
+					</ul>
+				</div>	
+			</div>
 
-	<div id="attribute-board">
-		<h3>Time Elapsed: <span id="timer">0</span></h3>
-		<h3>Name: <span id="name">Input Name</span></h3>
-		<h3>Age: <span id='age'>0</span></h3>
-		<h3>Hunger: <span id="hunger">0</span></h3>
-		<h3>Sleepiness: <span id="sleepiness">0</span></h3>
-		<h3>Boredom: <span id="boredom">0</span></h3>
-	</div>
+			<h3 class='time'>Time - Minute(s): <span id="minutes">0</span> Seconds: <span id='seconds'>0</span></h3>
 
-	<div id="playground">
+			<div id="attribute-board">
+				<h3>Name:  <span id="name"></span></h3>
+				<h3>Age:  <span id='age'>0</span></h3>
+				<h3>Hunger:  <span id="hunger">0</span></h3>
+				<h3>Sleepiness:  <span id="sleepiness">0</span></h3>
+				<h3>Boredom:  <span id="boredom">0</span></h3>
+				<p>*Your Tamagatchi will die if any attribute reaches <span id='death'>10</span>
+			</div>
+		</div>
+
 		
+		<div id="playground">
+			
 
-	</div>
+		</div>
 
 
-	<div id="action-buttons">
-		<button>Feed</button>
-		<button>Lightswitch</button>
-		<button>Play!</button>
-		<form>
-			<input type="text" id='tamagatchi-name' placeholder="Enter Tamagatchi Name">
-			<button type='submit'>Create Tamagatchi</button>
-		</form>
+		<div id="action-buttons">`
+			<button>Feed</button>
+			<button>Lightswitch</button>
+			<button>Play!</button>
+			<form>
+				<input type="text" id='tamagatchi-name' placeholder="Enter Tamagatchi Name">
+				<button type='submit'>Create Tamagatchi</button>
+			</form>
+		</div>
 	</div>
 
 
