@@ -74,12 +74,13 @@ class Tamagatchi {
 		this.sleepRate = 2
 		this.display = this.phases[0]
 		// $('#playground img').attr('src', this.display)
-		for (let i = 0; i < 10; i++) {
+		for (let i = 0; i < 50; i++) {
+
 		$("#playground img")
-	        .fadeOut(100, () => {
-	            $("#playground img").attr('src');
+	        .fadeOut(1, () => {
+	            $("#playground img").attr('src', this.display);
 	        })
-	        .fadeIn(100, () => {
+	        .fadeIn(1, () => {
 	        	$("#playground img").attr('src', this.display);
 	        });
     	}
@@ -96,12 +97,12 @@ class Tamagatchi {
 		this.boredomRate = 6 // rate at which tamagatchi's boredom increases
 		this.sleepRate = 2
 		this.display = this.phases[1]
-		for (let i = 0; i < 10; i++) {
+		for (let i = 0; i < 50; i++) {
 		$("#playground img")
-	        .fadeOut(100, () => {
-	            $("#playground img").attr('src');
+	        .fadeOut(1, () => {
+	            $("#playground img").attr('src', this.display);
 	        })
-	        .fadeIn(100, () => {
+	        .fadeIn(1, () => {
 	        	$("#playground img").attr('src', this.display);
 	        });
     	}
@@ -168,6 +169,7 @@ const game = {
 	awakeTime: 0,
 	causeOfDeath: '',
 	bounceSpeed: 3000,
+	oldX: 0,
 	createTamagatchi(){
 		myTamagatchi = new Tamagatchi() //instantiates tamagatchi
 
@@ -297,6 +299,14 @@ const game = {
 			const min = -300
 			const newX = Math.floor(Math.random() * (max - min)) + min
 			const newSpeed = this.bounceSpeed + Math.floor(Math.random() * 10)
+			if (newX >= this.oldX) {
+				$('img').css('transform', 'scaleX(-1)')
+				this.oldX = newX
+			} else {
+				$('img').css('transform', 'scaleX(1)')
+				this.oldX = newX
+			}
+
 			$('img').animate({
 				'left': newX + 'px',
 			}, this.bounceSpeed, 'linear', () => {
@@ -315,7 +325,6 @@ const game = {
 //event listeners for all action buttons
 $('#action-buttons').on('click', (e) => {
 	const buttonClicked = $(e.target).text()
-
 	if (buttonClicked === 'Create Tamagatchi') {
 		//when the create tamagatchi button is clicked the game.createTamagatchi method is called
 		game.createTamagatchi()
