@@ -3,20 +3,20 @@
 class Tamagatchi {
 	constructor(){
 		this.age = 0
-		this.ageInterval = 120 //seconds until tamagatchi ages up
+		this.ageInterval = 24 //seconds until tamagatchi ages up
 		this.morphAge1 = 1 //age at which tamagatchi will morph the first time
 		this.morphAge2 = 4 //age at which tamagatchi will morph the second time
 		this.hunger = 5 // base hunger attribute
 		this.sleepiness = 5 // base sleepiness attribute
 		this.boredom = 5 // base boredom attribute
 		this.maxAttr = 10 // maximum tamagatchi's attributes can go before it dies
-		this.hungerInterval = 60 // seconds until tamagatchi's hunger increases
+		this.hungerInterval = 12 // seconds until tamagatchi's hunger increases
 		this.hungerDown = 3 // rate at which hunger goes down when tamagatchi is fed
 		this.hungerRate = 2 // rate at which tamagatchi's hunger increases
-		this.boredomInterval = 100 // seconds until tamagatchis boredom increases
+		this.boredomInterval = 20 // seconds until tamagatchis boredom increases
 		this.boredomDown = 4 // rate at which boredom goes down when tamagatchi is played with 
 		this.boredomRate = 4 // rate at which tamagatchi's boredom increases
-		this.sleepRate = 20 // number of seconds until tamagatchi's sleep either increases or decreases
+		this.sleepRate = 4 // number of seconds until tamagatchi's sleep either increases or decreases
 		this.dead = false
 		this.display = 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png'
 		this.phases = ['https://assets.pokemon.com/assets/cms2/img/pokedex/full/008.png', 'https://cdn.bulbagarden.net/upload/thumb/0/02/Blasty.png/230px-Blasty.png']
@@ -66,13 +66,13 @@ class Tamagatchi {
 	}
 	morph1(){
 		this.maxAttr = 15
-		this.hungerInterval = 30
+		this.hungerInterval = 6
 		this.hungerRate = 2 // rate at which tamagatchi's hunger increases
 		this.hungerDown = 4
-		this.boredomInterval = 60// seconds until tamagatchis boredom increases
+		this.boredomInterval = 12// seconds until tamagatchis boredom increases
 		this.boredomDown = 3
 		this.boredomRate = 5 // rate at which tamagatchi's boredom increases
-		this.sleepRate = 10
+		this.sleepRate = 2
 		this.display = this.phases[0]
 		$('#playground img').remove()
 		$('#playground').append($('<img/>').attr('src', this.display))
@@ -81,13 +81,13 @@ class Tamagatchi {
 	}
 	morph2(){
 		this.maxAttr = 25
-		this.hungerInterval = 30
+		this.hungerInterval = 6
 		this.hungerRate = 4 // rate at which tamagatchi's hunger increases
 		this.hungerDown = 6
-		this.boredomInterval = 60 // seconds until tamagatchis boredom increases
+		this.boredomInterval = 12 // seconds until tamagatchis boredom increases
 		this.boredomDown = 4
 		this.boredomRate = 6 // rate at which tamagatchi's boredom increases
-		this.sleepRate = 8
+		this.sleepRate = 2
 		this.display = this.phases[1]
 		$('#playground img').remove()
 		$('#playground').append($('<img/>').attr('src', this.display))
@@ -171,6 +171,7 @@ const game = {
 		//starts the timer
 		this.startTimer()
 		this.bounce()
+		$('form').hide()
 	},
 	startTimer(){
 		//starts the timer
@@ -210,7 +211,7 @@ const game = {
 			}
 			// this.bounce()
 			
-		}, 200)
+		}, 1000)
 	},
 	printClock(){
 
@@ -289,8 +290,7 @@ const game = {
 				this.bounce()
 			})
 		}
-		console.log('ran bounce');
-		// console.log(backgroundPosition);
+
 	},
 	
 
@@ -302,21 +302,22 @@ const game = {
 //event listeners for all action buttons
 $('#action-buttons').on('click', (e) => {
 	const buttonClicked = $(e.target).text()
-	console.log(buttonClicked);
+
 	if (buttonClicked === 'Create Tamagatchi') {
 		//when the create tamagatchi button is clicked the game.createTamagatchi method is called
 		game.createTamagatchi()
 
 	}
-	if (buttonClicked === 'Feed' && game.lightsOn === true) {
+	if (myTamagatchi.dead === true) {
+		$('#message-ul').prepend($('<li/>').text("You can't do anything with " + myTamagatchi.name + ', it is DEAD'));
+
+	} else if (buttonClicked === 'Feed' && game.lightsOn === true) {
 		game.feed()
 	} else if (buttonClicked == 'Feed' && game.lightsOn === false){
 		$('#message-ul').prepend($('<li/>').text('You cannot feed ' + myTamagatchi.name + ', it is asleep'));
-	} 
-	if (buttonClicked === 'Lightswitch') {
+	} else if (buttonClicked === 'Lightswitch') {
 		game.lightSwitch()
-	}
-	if (buttonClicked === 'Play!') {
+	} else if (buttonClicked === 'Play!') {
 		game.play()
 	} 
 })
