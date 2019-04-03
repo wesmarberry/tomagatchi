@@ -21,7 +21,7 @@ class Tamagatchi {
 		this.phases = [
 			['https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/008.png', 'https://cdn.bulbagarden.net/upload/thumb/0/02/Blasty.png/230px-Blasty.png'],
 			['https://vignette.wikia.nocookie.net/pokemon-revolution/images/4/41/004Charmander_OS_anime_2.png/revision/latest?cb=20150625082016', 'https://pre00.deviantart.net/fe39/th/pre/i/2016/365/e/8/charmeleon_by_natsuakai-d5lq58r.png', 'https://static.pokemonpets.com/images/monsters-images-300-300/6-Charizard.png'],
-			['https://static.pokemonpets.com/images/monsters-images-300-300/1-Bulbasaur.png', 'https://cdn.bulbagarden.net/upload/thumb/7/73/002Ivysaur.png/250px-002Ivysaur.png', 'https://cdn.bulbagarden.net/upload/thumb/a/ae/003Venusaur.png/1200px-003Venusaur.png']
+			['https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png', 'hhttp://www.sclance.com/pngs/ivysaur-png/ivysaur_png_722324.png', 'https://cdn.bulbagarden.net/upload/thumb/a/ae/003Venusaur.png/1200px-003Venusaur.png']
 			]
 		this.rand = Math.floor(Math.random() * 3)
 		this.display = this.phases[this.rand][0]
