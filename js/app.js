@@ -5,7 +5,7 @@ class Tamagatchi {
 		this.age = 0
 		this.ageInterval = 24 //seconds until tamagatchi ages up
 		this.morphAge1 = 1 //age at which tamagatchi will morph the first time
-		this.morphAge2 = 4 //age at which tamagatchi will morph the second time
+		this.morphAge2 = 2 //age at which tamagatchi will morph the second time
 		this.hunger = 5 // base hunger attribute
 		this.sleepiness = 5 // base sleepiness attribute
 		this.boredom = 5 // base boredom attribute
@@ -21,7 +21,7 @@ class Tamagatchi {
 		this.phases = [
 			['https://assets.pokemon.com/assets/cms2/img/pokedex/full/007.png', 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/008.png', 'https://cdn.bulbagarden.net/upload/thumb/0/02/Blasty.png/230px-Blasty.png'],
 			['https://vignette.wikia.nocookie.net/pokemon-revolution/images/4/41/004Charmander_OS_anime_2.png/revision/latest?cb=20150625082016', 'https://pre00.deviantart.net/fe39/th/pre/i/2016/365/e/8/charmeleon_by_natsuakai-d5lq58r.png', 'https://static.pokemonpets.com/images/monsters-images-300-300/6-Charizard.png'],
-			['https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png', 'hhttp://www.sclance.com/pngs/ivysaur-png/ivysaur_png_722324.png', 'https://cdn.bulbagarden.net/upload/thumb/a/ae/003Venusaur.png/1200px-003Venusaur.png']
+			['https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/250px-001Bulbasaur.png', 'https://img.rankedboost.com/wp-content/uploads/2018/10/Ivysaur-Pokemon-Lets-GO.png', 'https://cdn.bulbagarden.net/upload/thumb/a/ae/003Venusaur.png/1200px-003Venusaur.png']
 			]
 		this.rand = Math.floor(Math.random() * 3)
 		this.display = this.phases[this.rand][0]
@@ -219,6 +219,7 @@ const game = {
 			}
 			//if the current time is divisible by the boredom interval then it increases the boredom by the boredom rate
 			//tamagatchi cannot get more bored while alseep so this only runs when the lights are on
+
 			if (this.boredomTime % myTamagatchi.boredomInterval === 0 && this.boredomTime !== 0) {
 				this.increaseBoredom()
 			}
@@ -255,6 +256,7 @@ const game = {
 		//boredom is increased at the rate defined in the tamagatchi class
 		if (myTamagatchi.boredom < myTamagatchi.maxAttr) {
 			myTamagatchi.boredom += myTamagatchi.boredomRate
+			this.boredomTime++
 			$('#boredom').text(myTamagatchi.boredom)
 		} 
 		if (myTamagatchi.boredom >= myTamagatchi.maxAttr) {
