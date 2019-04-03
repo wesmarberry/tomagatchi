@@ -5,7 +5,7 @@ class Tamagatchi {
 		this.age = 0
 		this.ageInterval = 24 //seconds until tamagatchi ages up
 		this.morphAge1 = 1 //age at which tamagatchi will morph the first time
-		this.morphAge2 = 2 //age at which tamagatchi will morph the second time
+		this.morphAge2 = 4 //age at which tamagatchi will morph the second time
 		this.hunger = 5 // base hunger attribute
 		this.sleepiness = 5 // base sleepiness attribute
 		this.boredom = 5 // base boredom attribute
