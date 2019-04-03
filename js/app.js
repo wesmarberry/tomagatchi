@@ -24,7 +24,6 @@ class Tamagatchi {
 	}
 	eat(){
 		this.hunger -= this.hungerDown
-		console.log(this.hunger + ' is the tamagatchis hunger level');
 		if (this.hunger <= 0) { //prevents adding hunger when Tamagatchi is fully fed
 			this.hunger = 0
 		}
@@ -74,7 +73,16 @@ class Tamagatchi {
 		this.boredomRate = 5 // rate at which tamagatchi's boredom increases
 		this.sleepRate = 2
 		this.display = this.phases[0]
-		$('#playground img').attr('src', this.display)
+		// $('#playground img').attr('src', this.display)
+		for (let i = 0; i < 10; i++) {
+		$("#playground img")
+	        .fadeOut(100, () => {
+	            $("#playground img").attr('src');
+	        })
+	        .fadeIn(100, () => {
+	        	$("#playground img").attr('src', this.display);
+	        });
+    	}
 		$('#message-ul').prepend($('<li/>').text(myTamagatchi.name + ' evolved!'))
 		$('#death').text(this.maxAttr)
 	}
@@ -88,8 +96,15 @@ class Tamagatchi {
 		this.boredomRate = 6 // rate at which tamagatchi's boredom increases
 		this.sleepRate = 2
 		this.display = this.phases[1]
-		$('#playground img').remove()
-		$('#playground').append($('<img/>').attr('src', this.display))
+		for (let i = 0; i < 10; i++) {
+		$("#playground img")
+	        .fadeOut(100, () => {
+	            $("#playground img").attr('src');
+	        })
+	        .fadeIn(100, () => {
+	        	$("#playground img").attr('src', this.display);
+	        });
+    	}
 		$('#message-ul').prepend($('<li/>').text(myTamagatchi.name + ' evolved!'))
 		$('#death').text(this.maxAttr)
 	}
@@ -213,9 +228,6 @@ const game = {
 			// this.bounce()
 			
 		}, 1000)
-	},
-	printClock(){
-
 	},
 	increaseHunger(){
 		//hunger increases at the rate defined in the myTamagatchi class
